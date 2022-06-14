@@ -59,6 +59,7 @@ main {
   border: 1px solid black;
   border-radius: 100rem;
   height: 4vh;
+  width: 7.5vh;
 }
 
 .key:hover {

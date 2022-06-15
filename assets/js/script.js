@@ -5,7 +5,7 @@ function dotClick(dotTag) {
   const lastCharacter = displayInput.value[displayInput.value.length - 1];
   if (lastCharacter === ' ' || displayInput.value === '') {
     displayInput.value += `0${dot}`;
-  } else {
+  } else if(lastCharacter !== dot) {
     displayInput.value += dot;
   }
 }
@@ -35,20 +35,24 @@ function inputSymbol(symbolTag) {
 
 function backspaceClick() {
   if (displayInput.value.length > 0) {
-    displayInput.value = displayInput.value.substring(0, displayInput.value.length - 1);
+    if (displayInput.value[displayInput.value.length - 1] === ' ') {
+      displayInput.value = displayInput.value.substring(0, displayInput.value.length - 3);
+    } else {
+      displayInput.value = displayInput.value.substring(0, displayInput.value.length - 1);
+    }
   }
 }
 
-function inputNumber(numberTag) {
-  const number = numberTag.target.innerText;
-  displayInput.value += number;
+function inputCharacter(characterTag) {
+  const character = characterTag.target.innerText;
+  displayInput.value += character;
 }
 
 function keyboardEventListeners() {
-  const numbers = ['zero', 'one', 'two', 'tree', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'pi'];
+  const numbers = ['zero', 'one', 'two', 'tree', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'pi', 'first-bracket', 'second-bracket'];
   for (let index = 0; index < numbers.length; index += 1) {
     const number = document.getElementById(numbers[index]);
-    number.addEventListener('click', inputNumber);
+    number.addEventListener('click', inputCharacter);
   }
   document.getElementById('backspace').addEventListener('click', backspaceClick);
   const symbols = ['addition', 'subtraction', 'multiply', 'divide'];
